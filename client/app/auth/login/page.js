@@ -45,14 +45,16 @@ const LoginForm = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const response = await dispatch(sendLoginData({email: user.email, password: user.password}))
-        const data = response.data;
-        if (response.status == 200) {
-            localStorage.setItem('token', data.token);
-            setCookie('token', data.token);
-            setCookie('name', data.username);
-            setCookie('email', data.email);
-            router.push('/order')
+        try {
+            const response = await dispatch(sendLoginData({email: user.email, password: user.password}))
+            const data = response.data;
+                localStorage.setItem('token', data.token);
+                setCookie('token', data.token);
+                setCookie('name', data.username);
+                setCookie('email', data.email);
+                router.push('/')
+        } catch(err){
+            console.log(err)
         }
     }
 
@@ -72,10 +74,6 @@ const LoginForm = () => {
                     <Label htmlFor="email">Email</Label>
                     <Input name='email' type='text' placeholder='Enter the Email' value={user.email} onChange={handleChange}/>
                     </div>
-                    {/* <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input name='name' type='email' placeholder='Enter the email' value={user.email} onChange={handleChange}/>
-                    </div> */}
                     <div className="grid gap-2">
                     <Label htmlFor="password">Password</Label>
                     <Input name='password' type='password' placeholder='Enter the Password' value={user.password} onChange={handleChange}/>

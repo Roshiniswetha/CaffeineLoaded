@@ -2,13 +2,56 @@
 
 import React from 'react';
 import Image from 'next/image';
+
+import Link from 'next/link'
+// import { useRouter } from 'next/navigation';
+
 import Box from '@mui/system/Box';
 
 import GridTile from "@/components/GridTile"
-
+import { Button } from '@/components/ui/button';
 import { TransitionProvider } from '@/animation/Transition';
 
+import GetCategory from './[category]/page';
+
+const ImagesList = [
+  {
+    image: '/images/coffee8.jpg',
+  },
+  {
+    image: '/images/coffee1.jpg',
+  },
+  {
+    image: '/images/coffee5.jpg',
+  },
+  {
+    image: '/images/coffee4.jpg',
+  },
+  {
+    image: '/images/coffee2.jpg',
+  },
+]
+
+const category = [
+  {
+    name: 'Cappuccino'
+  },
+  {
+    name: 'Espresso'
+  },
+  {
+    name: 'Caffe Latte'
+  },
+  {
+    name: 'Americano'
+  },
+  {
+    name: 'Macchiato'
+  },
+]
+
 export default function QuiltedImageList() {
+  // const router = useRouter()
   return (
     <TransitionProvider>
       <Box
@@ -23,21 +66,33 @@ export default function QuiltedImageList() {
           ],
           gridAutoRows: "1fr",
         }}
-  >
-     <GridTile>
-      <Image
-        sx={{ opacity: 0.5 }}
-        width='200'
-        height='200'
-        src="/images/coffee7.jpg"
-      />
-    </GridTile>
-    <GridTile bg="#12C612">
-    <h1 className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
+  >  
+     {Array.from({length:10}, (_,i)=>{
+       return( (i%2===0) ? 
+        <GridTile>
+              <Image
+                sx={{ opacity: 0.5 }}
+                width='200'
+                height='200'
+                src={ImagesList[i/2].image}
+              />
+          </GridTile>
+          :
+          <GridTile>
+              <Button className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
+               <Link href={`/order/${GetCategory()}`} as={`/order/${category[(i-1)/2].name}`}>
+                {category[(i-1)/2].name}
+              </Link>
+              </Button>
+          </GridTile>)
+     })
+     }
+    {/* <GridTile bg="#12C612">
+    <Button className="scroll-m-20 text-4xl font-extrabold lg:text-4xl" onClick={()=>router.push('/order/Cappuccino')}>
         Cappuccino
-      </h1>
-    </GridTile>
-    <GridTile>
+      </Button>
+    </GridTile> */}
+    {/* <GridTile>
       <Image
         sx={{ opacity: 0.5 }}
         width='200'
@@ -46,18 +101,18 @@ export default function QuiltedImageList() {
       />
     </GridTile>
     <GridTile >
-    <h1 className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
+    <Button className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
         Espresso
-    </h1>
+    </Button>
     </GridTile>
     <GridTile>
       <Image sx={{ opacity: 0.5 }} width='200'
         height='200' src="/images/coffee5.jpg" />
     </GridTile>
     <GridTile>
-    <h1 className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
+    <Button className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
         Caffe Latte
-      </h1>
+      </Button>
       </GridTile>
     <GridTile>
       <Image
@@ -68,9 +123,9 @@ export default function QuiltedImageList() {
       />
     </GridTile>
     <GridTile>
-    <h1 className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
+    <Button className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
         Americano
-      </h1>
+      </Button>
       </GridTile>
     <GridTile>
       <Image
@@ -81,10 +136,10 @@ export default function QuiltedImageList() {
       />
     </GridTile>
     <GridTile>
-      <h1 className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
+      <Button className="scroll-m-20 text-4xl font-extrabold lg:text-4xl">
         Macchiato
-      </h1>
-      </GridTile>
+      </Button>
+      </GridTile> */}
     </Box>
     </TransitionProvider>
   );

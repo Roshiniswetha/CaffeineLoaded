@@ -28,11 +28,6 @@ const LoginForm = () => {
         password: '',
     })
 
-    // useEffect(()=>{
-    //     axios('http://localhost:5000/')
-    //     .then(res=>console.log(res.data))
-    // })
-
     const handleChange = (e) => {
         console.log(e.target.name,e.target.value)
         setUser({
@@ -41,7 +36,8 @@ const LoginForm = () => {
         })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         dispatch(sendRegisterData({username: user.name, email: user.email, password: user.password}))
     }
 

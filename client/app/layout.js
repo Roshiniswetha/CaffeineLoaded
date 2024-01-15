@@ -1,20 +1,29 @@
-import { Inter } from 'next/font/google'
+import { Playfair_Display, Cinzel_Decorative } from 'next/font/google'
 import { ThemeProvider } from "@/components/themeProvider"
 import Providers from '@/store/reducers'
 
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const playfair = Playfair_Display({ 
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-playfair-display'
+ })
+const cinzel = Cinzel_Decorative({ 
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-cinzel-decorative'
+ })
 
 export const metadata = {
-  title: 'Caffiene Loaded',
+  title: 'Caffeine Loaded',
   description: 'A Coffee machine app',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cinzel.variable}>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"

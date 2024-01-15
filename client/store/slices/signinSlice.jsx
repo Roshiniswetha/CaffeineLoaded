@@ -17,7 +17,7 @@ const signinSlice = createSlice({
                 },
                 getSignInPassword(state,action){
                     state.password = action.payload
-                },
+                }
     }
 })
 
